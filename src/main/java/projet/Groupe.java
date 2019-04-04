@@ -25,17 +25,19 @@ public class Groupe extends Attribut{
 	}
 	
 	@Override
-	protected void listerNotes() {
-		// TODO Auto-generated method stub
+	public String listerNotes() {
+		String list="";
+		for(Note i : list_note)
+			list=list+ i.getNom()+"\n";
+		
+		return list;
+	}
+	@Override
+	public void supprimerNote(Note note) {
 		
 	}
 	@Override
-	protected void supprimerNote(Note note) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	protected void ajouterNote(Note note) {
+	public void ajouterNote(Note note) {
 		// TODO Auto-generated method stub
 		
 	}

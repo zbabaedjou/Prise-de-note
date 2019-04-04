@@ -34,8 +34,11 @@ public class List_Attribut extends Attribut{
 	 * @return
 	 */
 	@Override
-	protected void listerNotes() {
+	public String listerNotes() {
 		// TODO Auto-generated method stub
+		
+		
+		return "";
 		
 	}
 	
@@ -45,7 +48,7 @@ public class List_Attribut extends Attribut{
 	 * @return
 	 */
 	@Override
-	protected void supprimerNote(Note note) {
+	public void supprimerNote(Note note) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -55,7 +58,7 @@ public class List_Attribut extends Attribut{
 	 * @return
 	 */
 	@Override
-	protected void ajouterNote(Note note) {
+	public void ajouterNote(Note note) {
 		// TODO Auto-generated method stub
 		
 	}

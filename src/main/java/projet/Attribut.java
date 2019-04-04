@@ -7,16 +7,16 @@ package projet;
  */
 public abstract class Attribut {
 
-	private String nom;
-	private int type;
+	protected String nom;
+	protected int type;
 	
 	public Attribut(String nom,int type) {
 		this.type=type;
 		this.nom=nom;
 	}
-	protected abstract void listerNotes();
-	protected abstract void supprimerNote(Note  note);
-	protected abstract void ajouterNote(Note note);
+	public abstract String listerNotes();
+	public abstract void supprimerNote(Note  note);
+	public abstract void ajouterNote(Note note);
 	
 	public int getType() {
 		return type;
