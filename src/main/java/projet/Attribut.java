@@ -15,7 +15,7 @@ public abstract class Attribut {
 		this.nom=nom;
 	}
 	public abstract String listerNotes();
-	public abstract void supprimerNote(Note  note);
+	public abstract boolean supprimerNote(Note  note);
 	public abstract void ajouterNote(Note note);
 	
 	public int getType() {
