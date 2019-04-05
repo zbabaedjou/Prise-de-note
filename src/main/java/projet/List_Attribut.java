@@ -35,10 +35,12 @@ public class List_Attribut extends Attribut{
 	 */
 	@Override
 	public String listerNotes() {
-		// TODO Auto-generated method stub
-		
-		
-		return "";
+		String listeNote="";
+		for(Note n: list_all) {
+			listeNote= listeNote + n.getNom()+n.getContext()+n.getProjet()+n.getDate();
+			
+		}
+		return listeNote;
 		
 	}
 	
