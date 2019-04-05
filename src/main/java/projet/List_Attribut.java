@@ -50,11 +50,12 @@ public class List_Attribut extends Attribut{
 	 * @return
 	 */
 	@Override
-	public void supprimerNote(Note note) {
+	public boolean supprimerNote(Note note) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
-
+//essaie
 	/**ajouterNote
 	 * @param
 	 * @return
