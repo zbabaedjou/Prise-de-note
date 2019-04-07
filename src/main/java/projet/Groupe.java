@@ -17,12 +17,15 @@ import java.util.List;
  */
 public class Groupe extends Attribut{
 	
-	
+	private String nom;
+	private int type;	
 	private List<Note>list_note=new ArrayList<Note>();
 	
-	public Groupe(String nom, int type) {
-		super(nom,type);
+	public Groupe(String nom,int type) {
+		this.type=type;
+		this.nom=nom;
 	}
+	
 	
 	/**
 	 * Liste le nom de toutes les notes qui appartiennent a ce groupe spécifique
@@ -30,9 +33,9 @@ public class Groupe extends Attribut{
 	 */
 	@Override
 	public String listerNotes() {
-		String list="";
+		String list="     "+this.nom+"\n";
 		for(Note i : list_note)
-			list=list+ i.getNom()+" Context: "+i.getContext()+" Projet: "+i.getProjet()+" Date: "+i.getDate()+"\n";
+			list=list+"          "+ i.getNom()+" Context: "+i.getContext()+" Projet: "+i.getProjet()+" Date: "+i.getDate()+"\n";
 		
 		return list;
 	}
@@ -56,6 +59,10 @@ public class Groupe extends Attribut{
 	}
 	
 	
+	public List<Note> getList_note() {
+		return list_note;
+	}
+
 	/**
 	 * Ajoute une note dans la liste
 	 * @param Note : note  la note à ajouter
@@ -63,9 +70,15 @@ public class Groupe extends Attribut{
 	@Override
 	public void ajouterNote(Note note) {
 		
-		int toto;
 		list_note.add(note);
 		
+	}
+	
+	public int getType() {
+		return type;
+	}
+	public String getNom() {
+		return nom;
 	}
 	
 	
