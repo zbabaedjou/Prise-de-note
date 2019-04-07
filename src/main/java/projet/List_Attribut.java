@@ -8,8 +8,8 @@ import java.util.List;
  * @author Maryem 
  * @author Ziadath BABAEDJOU
  * 
- * Cette classe est l'élément composé du composite.
- * Elle permet de créer des groupes d'attribut qui sont: 
+ * Cette classe est l'Ã©lÃ©ment composÃ© du composite.
+ * Elle permet de crÃ©er des groupes d'attribut qui sont: 
  * Soit un Context: type=1
  * Soit un Projet: type=2
  * Soit une Date: type=3
@@ -56,8 +56,8 @@ public class List_Attribut extends Attribut{
 	}	
 	
 	/**supprimerNote
-	 * @param Note à supprimer
-	 * @return true si le fichier est trouvé et supprimé et false sinon
+	 * @param Note Ã  supprimer
+	 * @return true si le fichier est trouvÃ© et supprimÃ© et false sinon
 	 */
 	@Override
 	public boolean supprimerNote(Note note) {
@@ -83,9 +83,10 @@ public class List_Attribut extends Attribut{
 		
 		else
 			return false;
+
 		
 	}
-
+//essaie
 	/**ajouterNote
 	 * @param
 	 * @return
