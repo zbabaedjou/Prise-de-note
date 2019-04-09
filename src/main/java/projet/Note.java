@@ -41,7 +41,8 @@ public class Note {
 	             this.context=builder.builcontext;
 	             this.date=builder.builddate;
 
-	    	}
+	        }
+
 	           
 	     public static class Builder
 	        {

@@ -1,5 +1,7 @@
 package projet;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +126,9 @@ public class List_Attribut extends Attribut{
 				break;
 			}
 		if(exist==0) {
-			this.dates.add(new Groupe(note.getDate(),3));		
+			Format formatter = new SimpleDateFormat("MMMM");  
+		    String s = formatter.format(note.getDate());
+			this.dates.add(new Groupe(s,3));		
 		}
 		
 	}
