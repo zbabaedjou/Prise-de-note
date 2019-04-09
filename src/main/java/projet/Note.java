@@ -1,5 +1,6 @@
 package projet;
 
+
 import java.util.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -9,6 +10,7 @@ public class Note {
 	    private String projet;
 	    private String context;
 	    private Date  date;
+
 	    
 	    
 	    public String getNom() {
@@ -24,22 +26,26 @@ public class Note {
 	            return context;
 	        }
 
+
 	    public Date getDate()
+
 	        {
 	            return date;
 	        }
 	    
 	    public Note (Builder builder)
 	        {
+
 	    		this.nom =builder.buildnom; 
 	             this.projet=builder.buildprojet;
 	             this.context=builder.builcontext;
 	             this.date=builder.builddate;
-	        }
+
 	    
 	           
 	     public static class Builder
 	        {
+
 	                 private String buildnom;
 	    	 		 private String buildprojet;
 	                 private String builcontext;
@@ -64,8 +70,12 @@ public class Note {
 	                      }
 	        }
 
+
 	    @Override
 	    public String toString() {
 	        return "Note{" + "project=" + projet + ", context=" + context + ", date=" + date + '}';
 	    }
+	
+	
+	
 }
