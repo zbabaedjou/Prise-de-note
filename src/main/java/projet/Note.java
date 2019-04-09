@@ -38,7 +38,7 @@ public class Note {
 
 	    		this.nom =builder.buildnom; 
 	             this.projet=builder.buildprojet;
-	             this.context=builder.builcontext;
+	             this.context=builder.buildcontext;
 	             this.date=builder.builddate;
 
 	        }
@@ -49,14 +49,14 @@ public class Note {
 
 	                 private String buildnom;
 	    	 		 private String buildprojet;
-	                 private String builcontext;
+	                 private String buildcontext;
 	                 private Date builddate;
 	                 
-	             public Builder (String nom,String projet,String context)
+	             public Builder (String nom)
 	                {
 	            	 	this.buildnom=nom;
-	                    this.buildprojet=projet;
-	                    this.builcontext=context;
+	                    this.buildprojet="Default Project";
+	                    this.buildcontext="Default Context";
 	                   
 	                }
 	               public Builder date (Date ddn)
@@ -69,6 +69,15 @@ public class Note {
 	                      {
 	                      return new Note(this);
 	                      }
+	              public Builder addProjet(String projet) {
+	                      	  this.buildprojet=projet;
+	                      	  return this;
+	                      			  }
+	              public Builder addContext(String context) {
+	                      	  this.buildcontext=context;
+	                      	  return this;
+	                        }
+	                	
 	        }
 
 
@@ -76,7 +85,6 @@ public class Note {
 	    public String toString() {
 	        return "Note{" + "project=" + projet + ", context=" + context + ", date=" + date + '}';
 	    }
-	
-	
+	    
 	
 }
