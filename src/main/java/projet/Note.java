@@ -42,6 +42,7 @@ public class Note {
 	             this.date=builder.builddate;
 
 	        }
+
 	           
 	     public static class Builder
 	        {
