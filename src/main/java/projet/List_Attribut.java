@@ -126,7 +126,7 @@ public class List_Attribut extends Attribut{
 				break;
 			}
 		if(exist==0) {
-			Format formatter = new SimpleDateFormat("MMMM"); 
+			Format formatter = new SimpleDateFormat("MMMM");  
 		    String s = formatter.format(note.getDate());
 			this.dates.add(new Groupe(s,3));		
 		}
