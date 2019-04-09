@@ -6,7 +6,7 @@ public class Note {
 	private String nom;
 	  private String projet;
 	    private String context;
-	    private LocalDate  date;
+	    private String  date;
 	    
 	    
 	    public String getNom() {
@@ -22,7 +22,7 @@ public class Note {
 	            return context;
 	        }
 
-	    public LocalDate getDate()
+	    public String getDate()
 	        {
 	            return date;
 	        }
@@ -39,14 +39,14 @@ public class Note {
 	        {
 	                 private String projet;
 	                 private String context;
-	             private LocalDate date=LocalDate.parse("1991-06-05");;
+	             private String date=("1991-06-05");;
 	             public Builder (String projet,String context)
 	                {
 	                    this.projet=projet;
 	                    this.context=context;
 	                   
 	                }
-	               public Builder date (LocalDate ddn)
+	               public Builder date (String ddn)
 	                        {
 	                                date=ddn;
 	                                return this;
