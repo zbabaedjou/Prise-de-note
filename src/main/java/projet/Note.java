@@ -1,12 +1,16 @@
 package projet;
 
+
+import java.util.Date;
 import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Note {
-	private String nom;
-	  private String projet;
+	    private String nom;
+	    private String projet;
 	    private String context;
-	    private String  date;
+	    private Date  date;
+
 	    
 	    
 	    public String getNom() {
@@ -22,33 +26,41 @@ public class Note {
 	            return context;
 	        }
 
-	    public String getDate()
+
+	    public Date getDate()
+
 	        {
 	            return date;
 	        }
 	    
 	    public Note (Builder builder)
 	        {
-	             this.projet=builder.projet;
-	             this.context=builder.context;
-	             this.date=builder.date;
-	        }
+
+	    		this.nom =builder.buildnom; 
+	             this.projet=builder.buildprojet;
+	             this.context=builder.builcontext;
+	             this.date=builder.builddate;
+
 	    
 	           
 	     public static class Builder
 	        {
-	                 private String projet;
-	                 private String context;
-	             private String date=("1991-06-05");;
-	             public Builder (String projet,String context)
+
+	                 private String buildnom;
+	    	 		 private String buildprojet;
+	                 private String builcontext;
+	                 private Date builddate;
+	                 
+	             public Builder (String nom,String projet,String context)
 	                {
-	                    this.projet=projet;
-	                    this.context=context;
+	            	 	this.buildnom=nom;
+	                    this.buildprojet=projet;
+	                    this.builcontext=context;
 	                   
 	                }
-	               public Builder date (String ddn)
+	               public Builder date (Date ddn)
 	                        {
-	                                date=ddn;
+	                                this.builddate=ddn;
 	                                return this;
 	                        }    
 	                
@@ -58,6 +70,7 @@ public class Note {
 	                      }
 	        }
 
+
 	    @Override
 	    public String toString() {
 	        return "Note{" + "project=" + projet + ", context=" + context + ", date=" + date + '}';
@@ -65,5 +78,4 @@ public class Note {
 	
 	
 	
-
 }
