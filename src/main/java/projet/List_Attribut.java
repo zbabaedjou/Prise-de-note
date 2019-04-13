@@ -119,18 +119,20 @@ public class List_Attribut extends Attribut{
 		}
 		
 		exist=0; 
+		Format formatter = new SimpleDateFormat("MMMM");  
+	    String s = formatter.format(note.getDate());
 		for(Groupe n : this.dates)
-			if(n.getNom().equals(note.getDate())) {
+			if(n.getNom().equals(s)) {
 				n.ajouterNote(note);
 				exist=1;
 				break;
 			}
 		if(exist==0) {
-			Format formatter = new SimpleDateFormat("MMMM");  
-		    String s = formatter.format(note.getDate());
+			
 			this.dates.add(new Groupe(s,3));		
 		}
 		
+	
 	}
 	
 	/**listerDansFichier
@@ -179,6 +181,14 @@ public class List_Attribut extends Attribut{
 
 	public List<Groupe> getDates() {
 		return dates;
+	}
+	
+	public Note getNote(String nom) {
+		for(Note n : this.list_all)
+			if(n.getNom().equals(nom)) 
+				return n;
+		return null;
+			
 	}
 
 
