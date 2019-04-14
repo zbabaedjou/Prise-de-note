@@ -173,7 +173,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 		
 	}
 	
-	public void apercu(Note note) {
+	public void apercu(String nom) {
 		
 	}
 	
@@ -201,6 +201,10 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 		
 	}
 	
+	public void Rechercher(String mot) {
+		
+	}
+	
 	
 	/**majFichier : Met à jour le fichier index.adoc
 	 * 
@@ -223,5 +227,9 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
          }
 		 
 		
+	}
+	
+	public void inconnu() {
+		System.out.println("Command non connu");
 	}
 }
