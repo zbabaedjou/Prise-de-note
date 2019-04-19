@@ -13,6 +13,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	private String conf_file="C:\\Users\\Ziadath BABAEDJOU\\Desktop\\note.txt";
 	private String path;
 	private String application;
+	private String line;
 	
 	
 	public  Fonctionnalite() {
@@ -28,13 +29,13 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
            				if(line.length() != 0 && line.contains("PATH")){
            					//data=line;
            					String[] arrOfStr = line.split("=", 2); 
-           						System.out.println(arrOfStr[1]);
+           						//System.out.println(arrOfStr[1]);
            						this.path=arrOfStr[1];           						
            						
                 }
            				if(line.length() != 0 && line.contains("APP")){
            					String[] arrOfStr = line.split("=", 2); 
-       						System.out.println(arrOfStr[1]);
+       						//System.out.println(arrOfStr[1]);
        						
        						this.application=arrOfStr[1];
        						}
@@ -66,37 +67,37 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	public void editer(String nom ) throws IOException, InterruptedException {
 		int exist=0;
-		String line="";
-		String project = "";
-		String context="";
+		line = "";
+		String project = "DefaultProject";
+		String context="DefaultContext";
 		Note note = null;
 		for(Note n : List_Attribut.getInstance().getList_all())
 			if(n.getNom().equals(nom)) {
 				exist=1;
 				break;
 			}
-		
+		System.out.println(exist);
 		if(exist==0) {
-			String donnees;
-			Note n=new Note
+			note=new Note
 					.Builder(nom)
 					.build();
 			
-			List_Attribut.getInstance().ajouterNote(n);
+			List_Attribut.getInstance().ajouterNote(note);
 			
-
-			donnees="= "+n.getNom()+"\n"
-					+n.getDate()+"\n"
-					+":context: "+n.getContext()
-					+":project: "+n.getProjet()+"\n";
+			
 			
 			 try {
 	             FileWriter fichier = new FileWriter(path+nom+".adoc");
 
 	             BufferedWriter bufferedWriter = new BufferedWriter(fichier);
 
-	             bufferedWriter.write(donnees);
+	             bufferedWriter.write("= "+note.getNom());
 	             bufferedWriter.newLine();
+	             bufferedWriter.write(""+note.getDate());
+	             bufferedWriter.newLine();
+	             bufferedWriter.write(":context: "+note.getContext());
+	             bufferedWriter.newLine();
+	             bufferedWriter.write(":project: "+note.getProjet());
 	             bufferedWriter.newLine();
 	             bufferedWriter.close();
 	         }
@@ -109,7 +110,12 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 			 
 			 		
 		}
+		else {
+			note=List_Attribut.getInstance().getNote(nom);
+		}
 		
+		project = note.getProjet();
+		context= note.getContext();
 		Process p = Runtime.getRuntime().exec(this.application+" "+this.path+nom+".adoc");
 	    p.waitFor();		
 		
@@ -121,25 +127,30 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
                 new BufferedReader(fileReader);
 
            			while((line = bufferedReader.readLine()) != null) {
+           				System.out.println(line);
            				if(line.length() != 0 && line.contains("project")){ 
-           					String[] arrOfStr = line.split(":", 2); 
-       						System.out.println(arrOfStr[1]);
-       						project = arrOfStr[1];      
+           					String[] arrOfStr = line.split(":", 3); 
+       						System.out.println(arrOfStr[2]);
+       						if(!project.equals(arrOfStr[2]))
+       							project = arrOfStr[2];      
        						
-       					}                }
-           				if(line.length() != 0 && line.contains("context")){ 
-           					String[] arrOfStr = line.split(":", 2); 
-       						System.out.println(arrOfStr[1]);
-       						context = arrOfStr[1];  
-       						
-       					}
+       					}       
+           			 if (line.length() != 0 && line.contains("context")){ 
+        					String[] arrOfStr = line.split(":", 3); 
+    						System.out.println(arrOfStr[2]);
+    						if(!context.equals(arrOfStr[2]))
+    							context = arrOfStr[2];  
+    						
+    					}	
+           			}
+           			
               
 
            bufferedReader.close(); 
            
            // Vérifi si l'utilisateur a cahnger le context et le projet si oui il les change
-           if(project!="Default Project"&&context!="Default Context") {
-        	   
+           if(project!=note.getProjet()||context!=note.getContext()) {
+        	   System.out.println("teeeessssssssssssss");
 	           note=List_Attribut.getInstance().getNote(nom);
 	           List_Attribut.getInstance().supprimerNote(note);
 	           note=new Note
@@ -148,6 +159,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 						.addContext(context)
 						.build();
 	           List_Attribut.getInstance().ajouterNote(note);
+	           System.out.println(List_Attribut.getInstance().listerNotes());
            }
            
         }
@@ -168,6 +180,8 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 
 	
 	public void lister() {
+		
+		System.out.println("lister");
 		
 		System.out.println(List_Attribut.getInstance().listerNotes());
 		
@@ -212,7 +226,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	 */
 	public void majFichier() {
 		 try {
-             FileWriter fichier = new FileWriter("C:\\Users\\Ziadath BABAEDJOU\\Desktop\\notes\\index.adoc");
+             FileWriter fichier = new FileWriter(this.path+"index.adoc");
 
              BufferedWriter bufferedWriter = new BufferedWriter(fichier);
 

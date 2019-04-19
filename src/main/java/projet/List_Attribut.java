@@ -51,7 +51,7 @@ public class List_Attribut extends Attribut{
 	public String listerNotes() {
 		String listeNote="";
 		for(Note n: this.list_all) {
-			listeNote= listeNote+"          "+n.getNom()+" Contexte: "+n.getContext()+" Projet: "+n.getProjet()+" Date: "+n.getDate()+"\n";
+			listeNote= listeNote+"          "+n.getNom()+" Context: "+n.getContext()+" Projet: "+n.getProjet()+" Date: "+n.getDate()+"\n";
 		}
 		return listeNote;
 		
@@ -96,6 +96,7 @@ public class List_Attribut extends Attribut{
 	@Override
 	public void ajouterNote(Note note) {
 		int exist=0; 
+		Groupe gr;
 		this.list_all.add(note);
 		for(Groupe n : this.projets)
 			if(n.getNom().equals(note.getProjet())) {
@@ -104,7 +105,9 @@ public class List_Attribut extends Attribut{
 				break;
 			}
 		if(exist==0) {
-			this.projets.add(new Groupe(note.getProjet(),2));		
+			gr=new Groupe(note.getProjet(),2);
+			gr.ajouterNote(note);			
+			this.projets.add(gr);		
 		}
 		
 		exist=0; 
@@ -115,7 +118,11 @@ public class List_Attribut extends Attribut{
 				break;
 			}
 		if(exist==0) {
-			this.contextes.add(new Groupe(note.getContext(),1));		
+			gr=new Groupe(note.getContext(),1);
+			gr.ajouterNote(note);			
+			this.contextes.add(gr);
+			
+			//this.contextes.add(new Groupe(note.getContext(),1));		
 		}
 		
 		exist=0; 
@@ -128,8 +135,9 @@ public class List_Attribut extends Attribut{
 				break;
 			}
 		if(exist==0) {
-			
-			this.dates.add(new Groupe(s,3));		
+			gr=new Groupe(s,3);
+			gr.ajouterNote(note);			
+			this.dates.add(gr);
 		}
 		
 	
@@ -151,10 +159,10 @@ public class List_Attribut extends Attribut{
 			list_context=list_context+n.listerNotes()+"\n \n";
 		
 		list_date="Par Date:\n \n \n";
-		for(Groupe n : this.contextes)
+		for(Groupe n : this.dates)
 			list_date=list_date+n.listerNotes()+"\n \n";
 		
-		list=list_projet+"\n \n \n \n"+list_context+"\n \n \n \n"+list_date;
+		list="Toutes les notes \n\n\n"+this.listerNotes()+"\n \n \n \n"+list_projet+"\n \n \n \n"+list_context+"\n \n \n \n"+list_date;
 		
 		return list;
 	}

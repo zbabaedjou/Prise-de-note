@@ -2,8 +2,7 @@ package projet;
 
 
 import java.util.Date;
-import java.time.LocalDate;
-import java.util.Calendar;
+
 
 public class Note {
 	    private String nom;
@@ -55,8 +54,9 @@ public class Note {
 	             public Builder (String nom)
 	                {
 	            	 	this.buildnom=nom;
-	                    this.buildprojet="Default Project";
-	                    this.buildcontext="Default Context";
+	            	 	this.builddate= new Date();
+	                    this.buildprojet="DefaultProject";
+	                    this.buildcontext="DefaultContext";
 	                   
 	                }
 	               public Builder date (Date ddn)
