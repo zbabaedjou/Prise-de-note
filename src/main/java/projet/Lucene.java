@@ -1,6 +1,7 @@
 //git pull https://github.com/zbabaedjou/PriseDeNote master
-package projet;
+//Fonction de  recherche a l'aide de lucene biblio
 
+package projet;
 import java.util.List;
 import java.util.ArrayList;
 

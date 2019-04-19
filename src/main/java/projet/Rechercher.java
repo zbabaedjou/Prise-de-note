@@ -1,5 +1,5 @@
 package projet;
-
+//package
 public class Rechercher implements Command {
 	
 	 Fonctionnalite fonction;
