@@ -9,7 +9,6 @@ public class Rechercher implements Command {
 	  public void execute(String mot){
 	    this.fonction.Rechercher(mot); ;
 	  }
-
-
-
+	  
+	  
 }
