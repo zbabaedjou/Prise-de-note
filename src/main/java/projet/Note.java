@@ -60,16 +60,13 @@ public class Note  implements Serializable{
 	             public Builder (String nom)
 	                {
 	            	 	this.buildnom=nom;
-	            	 	this.builddate= new Date();
+	            	 	this.builddate=new Date();
+
 	                    this.buildprojet="DefaultProject";
 	                    this.buildcontext="DefaultContext";
 	                   
 	                }
-	               public Builder date (Date ddn)
-	                        {
-	                                this.builddate=ddn;
-	                                return this;
-	                        }    
+	         
 	                
 	                      public Note build() 
 	                      {
