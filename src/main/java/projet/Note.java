@@ -1,11 +1,17 @@
 package projet;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Note {
-	    private String nom;
+public class Note  implements Serializable{
+
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		private String nom;
 	    private String projet;
 	    private String context;
 	    private Date  date;
@@ -55,6 +61,7 @@ public class Note {
 	                {
 	            	 	this.buildnom=nom;
 	            	 	this.builddate=new Date();
+
 	                    this.buildprojet="DefaultProject";
 	                    this.buildcontext="DefaultContext";
 	                   
