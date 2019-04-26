@@ -1,5 +1,9 @@
 package projet;
 import java.util.Arrays;
+import java.util.HashMap;
+
+import org.asciidoctor.Asciidoctor;
+
 import static org.asciidoctor.Asciidoctor.Factory.create;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -201,8 +205,20 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	public void apercu(String nom) {
 		
+		/*Asciidoctor asciidoctor=create();
+		String[] result = asciidoctor.convertFiles(
+			    Arrays.asList(new File(this.path+nom+".adoc")),
+			    new HashMap<String, Object>());
+				System.out.println(result.length);*/
+				
+		//		File  file= new File("test/test.html");
 		
-		
+			try {
+				Runtime.getRuntime().exec(new String[] {"start"+this.ascii_view,this.path+nom+".adoc"});
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
 	
