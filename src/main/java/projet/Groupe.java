@@ -1,7 +1,7 @@
 package projet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Fatou Ndeye
@@ -15,11 +15,18 @@ import java.util.List;
  * Soit une Date: type=3
  * 
  */
-public class Groupe extends Attribut{
+public class Groupe extends Attribut implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private String nom;
 	private int type;	
-	private List<Note>list_note=new ArrayList<Note>();
+	private ArrayList<Note>list_note=new ArrayList<Note>();
 	
 	public Groupe(String nom,int type) {
 		this.type=type;
@@ -59,7 +66,7 @@ public class Groupe extends Attribut{
 	}
 	
 	
-	public List<Note> getList_note() {
+	public ArrayList<Note> getList_note() {
 		return list_note;
 	}
 

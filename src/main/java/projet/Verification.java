@@ -25,25 +25,31 @@ public class Verification {
 		sc = new Scanner(System.in);
 	}
 	
-	public void process(String [] args) {
+	public void process(String [] arg) {
 		
-		
-		if(args[0].equals("")) {
-			
+		String [] args = {"",""} ;
+		if(arg.length==0) {
 			String str="";
 		  do {			  
-			  System.out.println(">");
+			  System.out.print(">");
 			   str = sc.nextLine();
 		  }while(str.equals(""));
 		  String[] arrOfStr = str.split(" ", 2);  
 		  if(arrOfStr.length==1) 
 			  args[0]=str;		  
 		  else if(arrOfStr.length>1) {
+			  
+			  System.out.println(arrOfStr[0]);
+			  System.out.println(arrOfStr[1]);
+
 			  args[0]=arrOfStr[0]; 
 			  args[1]=arrOfStr[1];
 		  }
 			  
 		}
+		else
+			args=arg;
+		
 		 if(args[0].equalsIgnoreCase("edit")||args[0].equalsIgnoreCase("e") ) {
 		    	control.setCommand(editer);
 		    	if(!args[1].equalsIgnoreCase(""))
@@ -51,7 +57,7 @@ public class Verification {
 		    	else {
 		    		String str="";
 		  		  do {			  
-		  			  System.out.println(">");
+		  			  System.out.print(">");
 		  			   str = sc.nextLine();
 		  		  }while(str.equals(""));
 		  		  control.pressButton(str);
@@ -59,19 +65,19 @@ public class Verification {
 		    	
 		    		
 		    }
-		    if(args[0].equalsIgnoreCase("list")||args[0].equalsIgnoreCase("ls") ) {
+		 else if(args[0].equalsIgnoreCase("list")||args[0].equalsIgnoreCase("ls") ) {
 		    	control.setCommand(lister);
 		    	control.pressButton("");
 		    
 		    }
-		    if(args[0].equalsIgnoreCase("view")||args[0].equalsIgnoreCase("v") ) {
+		 else if(args[0].equalsIgnoreCase("view")||args[0].equalsIgnoreCase("v") ) {
 		    	control.setCommand(view);
 		    	if(!args[1].equalsIgnoreCase(""))
 		    		control.pressButton(args[1]);
 		    	else {
 		    		String str="";
 		  		  do {			  
-		  			  System.out.println(">");
+		  			  System.out.print(">");
 		  			   str = sc.nextLine();
 		  		  }while(str.equals(""));
 		  		  control.pressButton(str);
@@ -80,27 +86,27 @@ public class Verification {
 		    
 		    }
 		    
-		    if(args[0].equalsIgnoreCase("search")||args[0].equalsIgnoreCase("s") ) {
+		 else if(args[0].equalsIgnoreCase("search")||args[0].equalsIgnoreCase("s") ) {
 		    	control.setCommand(rechercher);
 		    	if(!args[1].equalsIgnoreCase(""))
 		    		control.pressButton(args[1]);
 		    	else {
 		    		String str="";
 		  		  do {			  
-		  			  System.out.println(">");
+		  			  System.out.print(">");
 		  			   str = sc.nextLine();
 		  		  }while(str.equals(""));
 		  		  control.pressButton(str);
 		    	}
 		    }
-		    if(args[0].equalsIgnoreCase("delete")||args[0].equalsIgnoreCase("d") ) {
+		 else if(args[0].equalsIgnoreCase("delete")||args[0].equalsIgnoreCase("d") ) {
 		    	control.setCommand(supprimer);
 		    	if(!args[1].equalsIgnoreCase(""))
 		    		control.pressButton(args[1]);
 		    	else {
 		    		String str="";
 		  		  do {			  
-		  			  System.out.println(">");
+		  			  System.out.print(">");
 		  			   str = sc.nextLine();
 		  		  }while(str.equals(""));
 		  		  control.pressButton(str);
@@ -109,7 +115,7 @@ public class Verification {
 		    }
 		    else {
 		    	control.setCommand(inconnu);
-		    	control.pressButton("");
+		    	control.pressButton(args[0]);
 		    }
 		    	
 		    

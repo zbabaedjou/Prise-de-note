@@ -73,7 +73,7 @@ public class List_AttributTest {
 		
 		
 	}
-	@Test
+	/*@Test
 	public void testListerNotes() {
 		
 		String list=""+
@@ -86,15 +86,16 @@ public class List_AttributTest {
 				"          "+ note7.getNom()+" Context: "+note7.getContext()+" Projet: "+note7.getProjet()+" Date: "+note7.getDate()+"\n";
 
 				assertEquals(List_Attribut.getInstance().listerNotes(),list);
-		System.out.println(List_Attribut.getInstance().listerDansFichier());
+		//System.out.println(List_Attribut.getInstance().listerDansFichier());
+		//System.out.println(List_Attribut.getInstance().listerNotes());
+	}*/
+
+	/*@Test
+	public void getNom() {
+		assertEquals(List_Attribut.getInstance().getNote("note2"),this.note2);
 	}
 
-/*	@Test
-	public void testSupprimerNote() {
-		fail("Not yet implemented");
-	}
-
-	@Test
+	/*@Test
 	public void testAjouterNote() {
 		fail("Not yet implemented");
 	}

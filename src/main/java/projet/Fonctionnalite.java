@@ -3,19 +3,29 @@ package projet;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT DANS NOTE
 	
 	private String conf_file="C:\\Users\\Ziadath BABAEDJOU\\Desktop\\note.txt";
 	private String path;
 	private String application;
+	private String ascii_view;
 	private String line;
+	private List_Attribut instanceUniq;
 	
-	
+	 /**
+	  * Constructeur de la classe
+	  * Il récupère le nom des applications externes a utiliser et le chemin du dossier d'enrégistrement des notes
+	  * Aussi il récupère l'etat du singleton dans le fichier de sauvegard 
+	  */
 	public  Fonctionnalite() {
 		String line="";
 		try {
@@ -27,18 +37,20 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 
            			while((line = bufferedReader.readLine()) != null) {
            				if(line.length() != 0 && line.contains("PATH")){
-           					//data=line;
            					String[] arrOfStr = line.split("=", 2); 
-           						//System.out.println(arrOfStr[1]);
            						this.path=arrOfStr[1];           						
            						
                 }
            				if(line.length() != 0 && line.contains("APP")){
-           					String[] arrOfStr = line.split("=", 2); 
-       						//System.out.println(arrOfStr[1]);
-       						
+           					String[] arrOfStr = line.split("=", 2); 						
        						this.application=arrOfStr[1];
        						}
+           				
+           				if(line.length() != 0 && line.contains("ASCII_VIEW")){
+           					String[] arrOfStr = line.split("=", 2); 						
+       						this.ascii_view=arrOfStr[1];
+       						}
+           			
             }   
 
             bufferedReader.close();         
@@ -54,6 +66,13 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
                 + conf_file + "'");          
          
         }
+		File tempFile = new File(this.path+"Saves.ser");
+		if(tempFile.exists()==false) {
+			this.instanceUniq=List_Attribut.getInstance();
+		}
+		else {
+			this.deserialize();
+		}
 	}
 	
 	
@@ -66,23 +85,17 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	 */
 	
 	public void editer(String nom ) throws IOException, InterruptedException {
-		int exist=0;
 		line = "";
 		String project = "DefaultProject";
 		String context="DefaultContext";
 		Note note = null;
-		for(Note n : List_Attribut.getInstance().getList_all())
-			if(n.getNom().equals(nom)) {
-				exist=1;
-				break;
-			}
-		System.out.println(exist);
-		if(exist==0) {
+		File tempFile = new File(this.path+nom+".adoc");
+	
+		if(tempFile.exists()==false) {
 			note=new Note
 					.Builder(nom)
 					.build();
-			
-			List_Attribut.getInstance().ajouterNote(note);
+			this.instanceUniq.ajouterNote(note);
 			
 			
 			
@@ -105,13 +118,12 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	        	 System.out.println(
 	                 "Erreur lors de l'écriture dans le fichier'"
 	                 + nom + ".adoc");
-	             // ex.printStackTrace();
 	         }
 			 
 			 		
 		}
-		else {
-			note=List_Attribut.getInstance().getNote(nom);
+		else{
+			note=this.instanceUniq.getNote(nom);
 		}
 		
 		project = note.getProjet();
@@ -127,39 +139,34 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
                 new BufferedReader(fileReader);
 
            			while((line = bufferedReader.readLine()) != null) {
-           				System.out.println(line);
            				if(line.length() != 0 && line.contains("project")){ 
            					String[] arrOfStr = line.split(":", 3); 
-       						System.out.println(arrOfStr[2]);
        						if(!project.equals(arrOfStr[2]))
        							project = arrOfStr[2];      
        						
        					}       
            			 if (line.length() != 0 && line.contains("context")){ 
         					String[] arrOfStr = line.split(":", 3); 
-    						System.out.println(arrOfStr[2]);
     						if(!context.equals(arrOfStr[2]))
     							context = arrOfStr[2];  
     						
-    					}	
+    					}
+           			 
            			}
            			
               
 
            bufferedReader.close(); 
            
-           // Vérifi si l'utilisateur a cahnger le context et le projet si oui il les change
            if(project!=note.getProjet()||context!=note.getContext()) {
-        	   System.out.println("teeeessssssssssssss");
-	           note=List_Attribut.getInstance().getNote(nom);
-	           List_Attribut.getInstance().supprimerNote(note);
+	           note=this.instanceUniq.getNote(nom);
+	           this.instanceUniq.supprimerNote(note);
 	           note=new Note
 						.Builder(nom)
 						.addProjet(project)
 						.addContext(context)
 						.build();
-	           List_Attribut.getInstance().ajouterNote(note);
-	           System.out.println(List_Attribut.getInstance().listerNotes());
+	           this.instanceUniq.ajouterNote(note);
            }
            
         }
@@ -176,31 +183,36 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 
         }
 	    this.majFichier();
+	    
 	}
 
-	
+	/**
+	 * lister()
+	 * Cete fonction liste les notes existantes
+	 */
 	public void lister() {
 		
-		System.out.println("lister");
-		
-		System.out.println(List_Attribut.getInstance().listerNotes());
+		System.out.println(this.instanceUniq.listerNotes());
 		
 	}
 	
 	public void apercu(String nom) {
+		
+		
 		
 	}
 	
 	
 	/** Delete()
 	 * Supprime une note
+	 * Cette fonction supprime la note du singleton puis suprime le fichier qui lui est associé
 	 * @param nom
 	 */
 	public void delete(String nom) {
 		
 		boolean exist=false;
-		Note note=List_Attribut.getInstance().getNote(nom);
-		exist=List_Attribut.getInstance().supprimerNote(note);
+		Note note=this.instanceUniq.getNote(nom);
+		exist=this.instanceUniq.supprimerNote(note);
 		if(exist==false)
 			System.out.println("Impossible de supprimer le fichier car il n'existe pas");
 		else {
@@ -221,7 +233,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	
 	/**majFichier : Met à jour le fichier index.adoc
-	 * 
+	 * sera appelé après chaque modification: editer; delete;
 	 * 
 	 */
 	public void majFichier() {
@@ -230,7 +242,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 
              BufferedWriter bufferedWriter = new BufferedWriter(fichier);
 
-             bufferedWriter.write(List_Attribut.getInstance().listerDansFichier());
+             bufferedWriter.write(this.instanceUniq.listerDansFichier());
              bufferedWriter.newLine();
              bufferedWriter.newLine();
              bufferedWriter.close();
@@ -240,10 +252,51 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
                  "Erreur lors de l'écriture dans le fichier index.adoc");
          }
 		 
+		 this.serialize();
+		 
 		
 	}
 	
-	public void inconnu() {
-		System.out.println("Command non connu");
+	/**
+	 * inconnu()
+	 * Fonction appelé lorsque l'utilisatuer lance une commande non suppoeté par le programme
+	 */
+	public void inconnu(String nom) {
+		System.out.println("Command '"+nom+"' non connu");
+	}
+	
+	
+	/**
+	 * Serialize()
+	 * Enrégistre le contenu du singleton dans un fichier afin de garder l'état du système de fichier
+	 */
+	public synchronized void serialize() {
+		try {
+			
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
+					this.path+"Saves.ser"));
+	        out.writeObject(this.instanceUniq);
+	        out.close();
+
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * Deserialise retourne le contenu du singleton sauvegardé lors de la sérialisation
+	 */
+	public synchronized void deserialize() {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+					 this.path+"Saves.ser"));
+		        this.instanceUniq= (List_Attribut)in.readObject();
+		        in.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

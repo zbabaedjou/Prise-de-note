@@ -7,7 +7,7 @@ public class Inconnu implements Command{
 	    this.fonction = fonction;
 	  }
 	  public void execute(String mot){
-	    this.fonction.inconnu();
+	    this.fonction.inconnu(mot);
 	  }
 
 	
