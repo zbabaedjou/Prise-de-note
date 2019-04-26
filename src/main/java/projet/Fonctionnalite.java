@@ -1,10 +1,4 @@
 package projet;
-import java.util.Arrays;
-import java.util.HashMap;
-
-import org.asciidoctor.Asciidoctor;
-
-import static org.asciidoctor.Asciidoctor.Factory.create;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -107,7 +101,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 			
 			
 			 try {
-	             FileWriter fichier = new FileWriter(path+nom+".adoc");
+	             FileWriter fichier = new FileWriter(this.path+nom+".adoc");
 
 	             BufferedWriter bufferedWriter = new BufferedWriter(fichier);
 
@@ -203,22 +197,29 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 		
 	}
 	
+	/**
+	 * aperçu()
+
+	 * affiche le visuel en ascidotor d'une note dans un navigateur
+	 * @param nom  de la note
+	 */
+	
 	public void apercu(String nom) {
 		
 		/*Asciidoctor asciidoctor=create();
 		String[] result = asciidoctor.convertFiles(
 			    Arrays.asList(new File(this.path+nom+".adoc")),
 			    new HashMap<String, Object>());
-				System.out.println(result.length);*/
+				System.out.println(result.length);
 				
-		//		File  file= new File("test/test.html");
+		//		File  file= new File("test/test.html");*/
 		
 			try {
-				Runtime.getRuntime().exec(new String[] {"start"+this.ascii_view,this.path+nom+".adoc"});
+				Runtime.getRuntime().exec(new String[] {this.ascii_view,this.path+nom+".adoc"});
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Impossible d'ouvrire le fichier");
 			}
+			
 	}
 	
 	
