@@ -29,6 +29,14 @@ public class Verification {
 		
 		String [] args = {"",""} ;
 		if(arg.length==0) {
+			
+			System.out.println("\n \t \t \t  PRISE DE NOTE \n");
+			System.out.println(" e|edit 'nom de la note'    :    Pour créer ou modifier une note");
+			System.out.println(" v|view 'nom de la note'    :    Pour visualiser une note");
+			System.out.println(" d|delete 'nom de la note'  :    Pour supprimer une note");
+			System.out.println(" s|search 'mot clé'         :    Pour chercher un mot clé dans les notes");
+			System.out.println(" list|ls                    :    Pour affichier la liste des fichiers du répertoire ");
+			
 			String str="";
 		  do {			  
 			  System.out.print(">");
