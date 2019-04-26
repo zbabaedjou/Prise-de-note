@@ -1,5 +1,6 @@
 package projet;
-
+import java.util.Arrays;
+import static org.asciidoctor.Asciidoctor.Factory.create;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,6 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import org.asciidoctor.Asciidoctor;
 
 public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT DANS NOTE
 	

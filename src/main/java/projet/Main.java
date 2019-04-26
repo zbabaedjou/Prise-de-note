@@ -1,9 +1,18 @@
 package projet;
 
+import static org.asciidoctor.Asciidoctor.Factory.create;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import org.asciidoctor.Asciidoctor;
+
 public class Main {
 
 	 public static void main(String[] args)    {
-		 Invoker control = new Invoker();
+		 
+		  Invoker control = new Invoker();
 		 Fonctionnalite fonction = new Fonctionnalite();
 		    Command editer = new Editer(fonction);
 		    Command supprimer = new Supprimer(fonction);
@@ -44,6 +53,9 @@ public class Main {
 		    	control.setCommand(inconnu);
 		    	control.pressButton("");
 		    }
-		    	
+		  
+		
+				
+				
 		  }
 }
