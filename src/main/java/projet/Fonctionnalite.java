@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 
 public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT DANS NOTE
@@ -248,6 +249,35 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	}
 	
 	public void Rechercher(String mot) {
+		
+		File directory = new File(this.path);
+        File[] files = directory.listFiles();
+        String chaine = "";
+
+        for (int i = 0; i < files.length; i++) 
+        {
+            if (files[i].getName().endsWith(".adoc")) 
+            {
+                 Scanner s = null;
+				try {
+					s = new Scanner(files[i]);
+				} catch (FileNotFoundException e) {
+					System.out.println("Impossible d'ouvrir le fichier");
+				}
+                chaine = "";
+                while (s.hasNextLine())
+                {
+                    chaine += s.nextLine();
+                }
+
+                if (chaine.contains(mot)) 
+                {
+                    System.out.println("Element trouvé dans: " + files[i].getName());
+
+                }
+
+            } 
+        }
 		
 	}
 	
