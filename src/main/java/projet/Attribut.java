@@ -2,7 +2,7 @@ package projet;
 
 
 /**
- * @author Fatou Ndeye
+ * @author Niang Ndeye Fatou 
  * @author Maryem 
  * @author Ziadath BABAEDJOU
  * 

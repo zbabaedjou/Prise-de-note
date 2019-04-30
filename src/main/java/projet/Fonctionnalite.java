@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 
-public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT DANS NOTE
+public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT DANS NOTE
 	
 	private String conf_file="C:\\Users\\Ziadath BABAEDJOU\\Desktop\\note.txt";
 	private String path;
