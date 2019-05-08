@@ -1,7 +1,12 @@
 package projet;
 
 import java.util.Scanner;
-
+/**
+ * @author NIANG Ndeye Fatou 
+ * @author ELMCHICHI Maryem 
+ * @author Ziadath BABAEDJOU
+ * 
+ */
 public class Verification {
 	private Invoker control;
 	private Fonctionnalite fonction;
@@ -35,7 +40,7 @@ public class Verification {
 			System.out.println(" v|view 'nom de la note'    :    Pour visualiser une note");
 			System.out.println(" d|delete 'nom de la note'  :    Pour supprimer une note");
 			System.out.println(" s|search 'mot clé'         :    Pour chercher un mot clé dans les notes");
-			System.out.println(" list|ls                    :    Pour affichier la liste des fichiers du répertoire ");
+			System.out.println(" ls|list                    :    Pour affichier la liste des fichiers du répertoire ");
 			
 			String str="";
 		  do {			  
@@ -43,36 +48,41 @@ public class Verification {
 			   str = sc.nextLine();
 		  }while(str.equals(""));
 		  String[] arrOfStr = str.split(" ", 2);  
-		  if(arrOfStr.length==1) 
-			  args[0]=str;		  
+		  if(arrOfStr.length==1 ) {
+			  args[0]=str;
+			  if(!args[0].equalsIgnoreCase("ls") && !args[0].equalsIgnoreCase("list")) {
+				  do {			  
+		  			  System.out.print(">");
+		  			   str = sc.nextLine();
+		  		  }while(str.equals(""));
+				  args[1]=str;
+			  }
+		  }	  
 		  else if(arrOfStr.length>1) {
-			  
-			  System.out.println(arrOfStr[0]);
-			  System.out.println(arrOfStr[1]);
-
 			  args[0]=arrOfStr[0]; 
 			  args[1]=arrOfStr[1];
 		  }
 			  
+		}
+		else if(arg.length==1) {
+			args[0]=arg[0];
+			String str="";
+			if(!args[0].equalsIgnoreCase("ls") && !args[0].equalsIgnoreCase("list")) {
+				  do {			  
+		  			  System.out.print(">");
+		  			   str = sc.nextLine();
+		  		  }while(str.equals(""));
+				  args[1]=str;
+			}
 		}
 		else
 			args=arg;
 		
 		 if(args[0].equalsIgnoreCase("edit")||args[0].equalsIgnoreCase("e") ) {
 		    	control.setCommand(editer);
-		    	if(!args[1].equalsIgnoreCase(""))
-		    		control.pressButton(args[1]);
-		    	else {
-		    		String str="";
-		  		  do {			  
-		  			  System.out.print(">");
-		  			   str = sc.nextLine();
-		  		  }while(str.equals(""));
-		  		  control.pressButton(str);
-		    	}
-		    	
-		    		
+		    	control.pressButton(args[1]);	
 		    }
+		 
 		 else if(args[0].equalsIgnoreCase("list")||args[0].equalsIgnoreCase("ls") ) {
 		    	control.setCommand(lister);
 		    	control.pressButton("");
@@ -80,46 +90,17 @@ public class Verification {
 		    }
 		 else if(args[0].equalsIgnoreCase("view")||args[0].equalsIgnoreCase("v") ) {
 		    	control.setCommand(view);
-		    	if(!args[1].equalsIgnoreCase(""))
-		    		control.pressButton(args[1]);
-		    	else {
-		    		String str="";
-		  		  do {			  
-		  			  System.out.print(">");
-		  			   str = sc.nextLine();
-		  		  }while(str.equals(""));
-		  		  control.pressButton(str);
-		    	}
-		    	
-		    
+		 	    
 		    }
 		    
 		 else if(args[0].equalsIgnoreCase("search")||args[0].equalsIgnoreCase("s") ) {
 		    	control.setCommand(rechercher);
-		    	if(!args[1].equalsIgnoreCase(""))
-		    		control.pressButton(args[1]);
-		    	else {
-		    		String str="";
-		  		  do {			  
-		  			  System.out.print(">");
-		  			   str = sc.nextLine();
-		  		  }while(str.equals(""));
-		  		  control.pressButton(str);
-		    	}
+		    	control.pressButton(args[1]);
+		    	
 		    }
 		 else if(args[0].equalsIgnoreCase("delete")||args[0].equalsIgnoreCase("d") ) {
 		    	control.setCommand(supprimer);
-		    	if(!args[1].equalsIgnoreCase(""))
-		    		control.pressButton(args[1]);
-		    	else {
-		    		String str="";
-		  		  do {			  
-		  			  System.out.print(">");
-		  			   str = sc.nextLine();
-		  		  }while(str.equals(""));
-		  		  control.pressButton(str);
-		    	}
-		    
+		    	control.pressButton(args[1]);    
 		    }
 		    else {
 		    	control.setCommand(inconnu);

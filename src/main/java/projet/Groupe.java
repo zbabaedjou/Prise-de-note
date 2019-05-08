@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author Fatou Ndeye
- * @author Maryem 
+ * @author NIANG Ndeye Fatou 
+ * @author ELMCHICHI Maryem 
  * @author Ziadath BABAEDJOU
  * 
  * Cette classe est l'élément unitaire du composite.
@@ -40,9 +40,9 @@ public class Groupe extends Attribut implements Serializable{
 	 */
 	@Override
 	public String listerNotes() {
-		String list="     "+this.nom+"\n";
+		String list="      * "+this.nom+"\n \n \n ";
 		for(Note i : list_note)
-			list=list+"          "+ i.getNom()+" Context: "+i.getContext()+" Projet: "+i.getProjet()+" Date: "+i.getDate()+"\n";
+			list=list+"\n               "+'*'+ i.getNom()+'*'+" _Context_ : "+i.getContext()+" _Projet_ : "+i.getProjet()+" _Date_ : "+i.getDate()+"\n";
 		
 		return list;
 	}
@@ -55,7 +55,7 @@ public class Groupe extends Attribut implements Serializable{
 	 * @return  true si la note a été trouvé et supprimé, false sinon
 	 */
 	@Override
-	public boolean supprimerNote(Note note) {/////// a ajouter sur la version des autres
+	public boolean supprimerNote(Note note) {
 		
 		if(list_note.contains(note)) {
 			list_note.remove(note);

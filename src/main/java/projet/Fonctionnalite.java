@@ -13,7 +13,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
-
+/**
+ * @author NIANG Ndeye Fatou 
+ * @author ELMCHICHI Maryem 
+ * @author Ziadath BABAEDJOU
+ */
 public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT DANS NOTE
 	
 	private String conf_file="C:\\Users\\Ziadath BABAEDJOU\\Desktop\\note.txt";
@@ -22,11 +26,12 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	private String ascii_view;
 	private String line;
 	private List_Attribut instanceUniq;
+	private BufferedReader bufferedReader;
 	
 	 /**
 	  * Constructeur de la classe
-	  * Il récupère le nom des applications externes a utiliser et le chemin du dossier d'enrégistrement des notes
-	  * Aussi il récupère l'etat du singleton dans le fichier de sauvegard 
+	  * Il rÃ©cupÃ¨re le nom des applications externes a utiliser et le chemin du dossier d'enrÃ©gistrement des notes
+	  * Aussi il rÃ©cupÃ¨re l'etat du singleton dans le fichier de sauvegard 
 	  */
 	public  Fonctionnalite() {
 		String line="";
@@ -79,8 +84,8 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	
 	/**
-	 * Editer(): Ouvre un fichier existant ou le créé qaudn il n'exista pas avant de l'ouvrir
-	 * Lors de la créatin il rempli le fichier par défaut avec les attribut projet et contextes par défaut
+	 * Editer(): Ouvre un fichier existant ou le crÃ©Ã© qaudn il n'exista pas avant de l'ouvrir
+	 * Lors de la crÃ©atin il rempli le fichier par dÃ©faut avec les attribut projet et contextes par dÃ©faut
 	 * @param nom
 	 * @throws IOException
 	 * @throws InterruptedException
@@ -118,14 +123,18 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	         }
 	         catch(IOException ex) {
 	        	 System.out.println(
-	                 "Erreur lors de l'écriture dans le fichier'"
+	                 "Erreur lors de l'Ã©criture dans le fichier'"
 	                 + nom + ".adoc");
-	         }
-			 
-			 		
+	         }	 		
 		}
+		
 		else{
 			note=this.instanceUniq.getNote(nom);
+			if(note==null) {
+				readFileAndAdd("DefaultProject", "DefaultContext", nom);
+				note=this.instanceUniq.getNote(nom);
+
+			}
 		}
 		
 		project = note.getProjet();
@@ -134,43 +143,8 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	    p.waitFor();		
 		
 	    try {
-            FileReader fileReader = 
-                new FileReader(this.path+nom+".adoc");
-            
-            BufferedReader bufferedReader = 
-                new BufferedReader(fileReader);
-
-           			while((line = bufferedReader.readLine()) != null) {
-           				if(line.length() != 0 && line.contains("project")){ 
-           					String[] arrOfStr = line.split(":", 3); 
-       						if(!project.equals(arrOfStr[2]))
-       							project = arrOfStr[2];      
-       						
-       					}       
-           			 if (line.length() != 0 && line.contains("context")){ 
-        					String[] arrOfStr = line.split(":", 3); 
-    						if(!context.equals(arrOfStr[2]))
-    							context = arrOfStr[2];  
-    						
-    					}
-           			 
-           			}
-           			
-              
-
-           bufferedReader.close(); 
-           
-           if(project!=note.getProjet()||context!=note.getContext()) {
-	           note=this.instanceUniq.getNote(nom);
-	           this.instanceUniq.supprimerNote(note);
-	           note=new Note
-						.Builder(nom)
-						.addProjet(project)
-						.addContext(context)
-						.build();
-	           this.instanceUniq.ajouterNote(note);
-           }
-           
+        
+	    	readFileAndAdd(project, context, nom);
         }
         catch(FileNotFoundException ex) {
             System.out.println(
@@ -187,19 +161,64 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	    this.majFichier();
 	    
 	}
+	
+	public void readFileAndAdd(String pro, String cont, String nom) throws IOException {
+		String project = pro;
+		String context=cont;
+		Note note=null;
+		FileReader fileReader = null;
+		
+			fileReader = new FileReader(this.path+nom+".adoc");
+		
+            
+            bufferedReader = new BufferedReader(fileReader);
+
+           			
+						while((line = bufferedReader.readLine()) != null) {
+							if(line.length() != 0 && line.contains("project")){ 
+								String[] arrOfStr = line.split(":", 3); 
+								if(!project.equals(arrOfStr[2]))
+									project = arrOfStr[2];      
+								
+							}       
+						 if (line.length() != 0 && line.contains("context")){ 
+								String[] arrOfStr = line.split(":", 3); 
+								if(!context.equals(arrOfStr[2]))
+									context = arrOfStr[2];  
+								
+							}
+      
+           if( note==null || project!=note.getProjet()||context!=note.getContext()) {
+	           note=this.instanceUniq.getNote(nom);
+	           this.instanceUniq.supprimerNote(note);
+	           note=new Note
+						.Builder(nom)
+						.addProjet(project)
+						.addContext(context)
+						.build();
+	           this.instanceUniq.ajouterNote(note);
+           }
+           
+						}
+           
+	}
 
 	/**
 	 * lister()
 	 * Cete fonction liste les notes existantes
 	 */
-	public void lister() {
+	public boolean lister() {
 		
 		System.out.println(this.instanceUniq.listerNotes());
+		if(!this.instanceUniq.listerNotes().equals(""))
+			return true;
+		else
+			return false;
 		
 	}
 	
 	/**
-	 * aperçu()
+	 * aperÃ§u()
 
 	 * affiche le visuel en ascidotor d'une note dans un navigateur
 	 * @param nom  de la note
@@ -226,10 +245,10 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	/** Delete()
 	 * Supprime une note
-	 * Cette fonction supprime la note du singleton puis suprime le fichier qui lui est associé
+	 * Cette fonction supprime la note du singleton puis suprime le fichier qui lui est associÃ©
 	 * @param nom
 	 */
-	public void delete(String nom) {
+	public boolean delete(String nom) {
 		
 		boolean exist=false;
 		Note note=this.instanceUniq.getNote(nom);
@@ -245,14 +264,16 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 		
 		}
 		
+		return exist;
 		
 	}
 	
-	public void Rechercher(String mot) {
+	public boolean Rechercher(String mot) {
 		
 		File directory = new File(this.path);
         File[] files = directory.listFiles();
         String chaine = "";
+        int count =0;
 
         for (int i = 0; i < files.length; i++) 
         {
@@ -270,20 +291,25 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
                     chaine += s.nextLine();
                 }
 
-                if (chaine.contains(mot)) 
+                if (chaine.toLowerCase().contains(mot.toLowerCase())) 
                 {
-                    System.out.println("Element trouvé dans: " + files[i].getName());
-
+                    System.out.println("Element trouvÃ© dans: " + files[i].getName());
+                    count++;
                 }
 
             } 
         }
+        
+        if(count>0)
+        	return true; 
+        else 
+        	return false;
 		
 	}
 	
 	
-	/**majFichier : Met à jour le fichier index.adoc
-	 * sera appelé après chaque modification: editer; delete;
+	/**majFichier : Met Ã  jour le fichier index.adoc
+	 * sera appelÃ© aprÃ¨s chaque modification: editer; delete;
 	 * 
 	 */
 	public void majFichier() {
@@ -291,6 +317,7 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
              FileWriter fichier = new FileWriter(this.path+"index.adoc");
 
              BufferedWriter bufferedWriter = new BufferedWriter(fichier);
+        
 
              bufferedWriter.write(this.instanceUniq.listerDansFichier());
              bufferedWriter.newLine();
@@ -299,7 +326,7 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
          }
          catch(IOException ex) {
         	 System.out.println(
-                 "Erreur lors de l'écriture dans le fichier index.adoc");
+                 "Erreur lors de l'Ã©criture dans le fichier index.adoc");
          }
 		 
 		 this.serialize();
@@ -309,7 +336,7 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	/**
 	 * inconnu()
-	 * Fonction appelé lorsque l'utilisatuer lance une commande non suppoeté par le programme
+	 * Fonction appelÃ© lorsque l'utilisatuer lance une commande non suppoetÃ© par le programme
 	 */
 	public void inconnu(String nom) {
 		System.out.println("Command '"+nom+"' non connu");
@@ -318,7 +345,7 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	/**
 	 * Serialize()
-	 * Enrégistre le contenu du singleton dans un fichier afin de garder l'état du système de fichier
+	 * EnrÃ©gistre le contenu du singleton dans un fichier afin de garder l'Ã©tat du systÃ¨me de fichier
 	 */
 	public synchronized void serialize() {
 		try {
@@ -336,7 +363,7 @@ public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	
 	/**
-	 * Deserialise retourne le contenu du singleton sauvegardé lors de la sérialisation
+	 * Deserialise retourne le contenu du singleton sauvegardÃ© lors de la sÃ©rialisation
 	 */
 	public synchronized void deserialize() {
 		try {
