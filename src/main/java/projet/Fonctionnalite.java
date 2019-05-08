@@ -18,7 +18,7 @@ import java.util.Scanner;
  * @author ELMCHICHI Maryem 
  * @author Ziadath BABAEDJOU
  */
-public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT DANS NOTE
+public class Fonctionnalite { ////////////////CHANGER DEFAULT PROJECT ET CoNTEXT DANS NOTE
 	
 	private String conf_file="C:\\Users\\Ziadath BABAEDJOU\\Desktop\\note.txt";
 	private String path;
@@ -30,8 +30,8 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	 /**
 	  * Constructeur de la classe
-	  * Il récupère le nom des applications externes a utiliser et le chemin du dossier d'enrégistrement des notes
-	  * Aussi il récupère l'etat du singleton dans le fichier de sauvegard 
+	  * Il rÃ©cupÃ¨re le nom des applications externes a utiliser et le chemin du dossier d'enrÃ©gistrement des notes
+	  * Aussi il rÃ©cupÃ¨re l'etat du singleton dans le fichier de sauvegard 
 	  */
 	public  Fonctionnalite() {
 		String line="";
@@ -84,8 +84,8 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	
 	/**
-	 * Editer(): Ouvre un fichier existant ou le créé qaudn il n'exista pas avant de l'ouvrir
-	 * Lors de la créatin il rempli le fichier par défaut avec les attribut projet et contextes par défaut
+	 * Editer(): Ouvre un fichier existant ou le crÃ©Ã© qaudn il n'exista pas avant de l'ouvrir
+	 * Lors de la crÃ©atin il rempli le fichier par dÃ©faut avec les attribut projet et contextes par dÃ©faut
 	 * @param nom
 	 * @throws IOException
 	 * @throws InterruptedException
@@ -123,7 +123,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	         }
 	         catch(IOException ex) {
 	        	 System.out.println(
-	                 "Erreur lors de l'écriture dans le fichier'"
+	                 "Erreur lors de l'Ã©criture dans le fichier'"
 	                 + nom + ".adoc");
 	         }	 		
 		}
@@ -218,7 +218,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	}
 	
 	/**
-	 * aperçu()
+	 * aperÃ§u()
 
 	 * affiche le visuel en ascidotor d'une note dans un navigateur
 	 * @param nom  de la note
@@ -245,7 +245,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	/** Delete()
 	 * Supprime une note
-	 * Cette fonction supprime la note du singleton puis suprime le fichier qui lui est associé
+	 * Cette fonction supprime la note du singleton puis suprime le fichier qui lui est associÃ©
 	 * @param nom
 	 */
 	public boolean delete(String nom) {
@@ -293,7 +293,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 
                 if (chaine.toLowerCase().contains(mot.toLowerCase())) 
                 {
-                    System.out.println("Element trouvé dans: " + files[i].getName());
+                    System.out.println("Element trouvÃ© dans: " + files[i].getName());
                     count++;
                 }
 
@@ -308,8 +308,8 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	}
 	
 	
-	/**majFichier : Met à jour le fichier index.adoc
-	 * sera appelé après chaque modification: editer; delete;
+	/**majFichier : Met Ã  jour le fichier index.adoc
+	 * sera appelÃ© aprÃ¨s chaque modification: editer; delete;
 	 * 
 	 */
 	public void majFichier() {
@@ -326,7 +326,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
          }
          catch(IOException ex) {
         	 System.out.println(
-                 "Erreur lors de l'écriture dans le fichier index.adoc");
+                 "Erreur lors de l'Ã©criture dans le fichier index.adoc");
          }
 		 
 		 this.serialize();
@@ -336,7 +336,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	/**
 	 * inconnu()
-	 * Fonction appelé lorsque l'utilisatuer lance une commande non suppoeté par le programme
+	 * Fonction appelÃ© lorsque l'utilisatuer lance une commande non suppoetÃ© par le programme
 	 */
 	public void inconnu(String nom) {
 		System.out.println("Command '"+nom+"' non connu");
@@ -345,7 +345,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	/**
 	 * Serialize()
-	 * Enrégistre le contenu du singleton dans un fichier afin de garder l'état du système de fichier
+	 * EnrÃ©gistre le contenu du singleton dans un fichier afin de garder l'Ã©tat du systÃ¨me de fichier
 	 */
 	public synchronized void serialize() {
 		try {
@@ -363,7 +363,7 @@ public class Fonctionnalite { ////////////////cHANGER DEFAULT PROJECT ET CoNTEXT
 	
 	
 	/**
-	 * Deserialise retourne le contenu du singleton sauvegardé lors de la sérialisation
+	 * Deserialise retourne le contenu du singleton sauvegardÃ© lors de la sÃ©rialisation
 	 */
 	public synchronized void deserialize() {
 		try {
