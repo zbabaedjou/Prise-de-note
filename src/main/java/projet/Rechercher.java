@@ -1,6 +1,6 @@
 package projet;
 /**
- * @author Niang Ndeye Fatou
+ * @author Niang Ndeye Fatouu
  * @author ELMCHICHI Maryem 
  * @author Ziadath BABAEDJOU
  * 
