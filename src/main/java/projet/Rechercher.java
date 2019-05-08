@@ -1,5 +1,10 @@
 package projet;
-//package
+/**
+ * @author NIANG Ndeye Fatou 
+ * @author ELMCHICHI Maryem 
+ * @author Ziadath BABAEDJOU
+ * 
+ */
 public class Rechercher implements Command {
 	
 	 Fonctionnalite fonction;

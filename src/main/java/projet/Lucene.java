@@ -1,10 +1,13 @@
-//git pull https://github.com/zbabaedjou/PriseDeNote master
-//Fonction de  recherche a l'aide de lucene biblio
 
 package projet;
 import java.util.List;
 import java.util.ArrayList;
-
+/**
+ * @author NIANG Ndeye Fatou 
+ * @author ELMCHICHI Maryem 
+ * @author Ziadath BABAEDJOU
+ * 
+ */
 public class Lucene 
 {
 	public List_Attribut list;

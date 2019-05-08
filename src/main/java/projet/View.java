@@ -1,5 +1,10 @@
 package projet;
-
+/**
+ * @author NIANG Ndeye Fatou 
+ * @author ELMCHICHI Maryem 
+ * @author Ziadath BABAEDJOU
+ * 
+ */
 public class View implements Command{
 	
 	Fonctionnalite fonction;

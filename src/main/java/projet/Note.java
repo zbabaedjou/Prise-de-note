@@ -4,10 +4,17 @@ package projet;
 import java.io.Serializable;
 import java.util.Date;
 
-
+/**
+ * @author NIANG Ndeye Fatou 
+ * @author ELMCHICHI Maryem 
+ * @author Ziadath BABAEDJOU
+ * 
+ */
 public class Note  implements Serializable{
-
-		/**
+	/**
+	 * @author NIANG Ndeye Fatou 
+	 * @author ELMCHICHI Maryem 
+	 * @author Ziadath BABAEDJOU
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -82,12 +89,5 @@ public class Note  implements Serializable{
 	                        }
 	                	
 	        }
-
-
-	    @Override
-	    public String toString() {
-	        return "Note{" + "project=" + projet + ", context=" + context + ", date=" + date + '}';
-	    }
-	    
 	
 }

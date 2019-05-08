@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * @author Fatou Ndeye
- * @author Maryem 
+ * @author NIANG Ndeye Fatou 
+ * @author ELMCHICHI Maryem 
  * @author Ziadath BABAEDJOU
  * 
  * Cette classe est l'élément composé du composite.
@@ -19,7 +19,6 @@ import java.util.Comparator;
  * Soit une Date: type=3
  * 
  */
-//https://dzone.com/articles/design-patterns-command
 public class List_Attribut extends Attribut implements Serializable {
 
 
@@ -141,24 +140,24 @@ public class List_Attribut extends Attribut implements Serializable {
 		    	 return n1.getNom().compareTo(n2.getNom());
 		    }
 		});
-		list_note="";
+		list_note=" \n == Toutes les notes \n \n \n";
 		for(Note n: this.list_all) {
-			list_note= list_note+"          "+n.getNom()+" Context: "+n.getContext()+" Projet: "+n.getProjet()+" Date: "+n.getDate()+"\n";
+			list_note= list_note+"\n \n            *"+n.getNom()+"* _Context_: "+n.getContext()+" _Projet_: "+n.getProjet()+" _Date_: "+n.getDate()+"\n";
 		}
 		
-		list_projet="Par Projet:\n \n \n";
+		list_projet="== Par Projet:\n \n \n";
 		for(Groupe n : this.projets)
 			list_projet=list_projet+n.listerNotes()+"\n \n";
 		
-		list_context="Par Context:\n \n \n";
+		list_context="== Par Context:\n \n \n";
 		for(Groupe n : this.contextes)
 			list_context=list_context+n.listerNotes()+"\n \n";
 		
-		list_date="Par Date:\n \n \n";
+		list_date="== Par Date:\n \n \n";
 		for(Groupe n : this.dates)
 			list_date=list_date+n.listerNotes()+"\n \n";
 		
-		list="Toutes les notes \n\n\n"+list_note+"\n \n \n \n"+list_projet+"\n \n \n \n"+list_context+"\n \n \n \n"+list_date;
+		list="= Index \n \n \n  "+list_note+"\n \n \n \n"+list_projet+"\n \n \n \n"+list_context+"\n \n \n \n"+list_date;
 		
 		return list;
 	}
@@ -176,11 +175,13 @@ public class List_Attribut extends Attribut implements Serializable {
 			for(Groupe n: this.contextes)
 				if(n.getNom().equals(note.getContext())) {
 					n.supprimerNote(note);
+					
 			}
 			
 			for(Groupe n: this.projets)
 				if(n.getNom().equals(note.getProjet())) {
 					n.supprimerNote(note);
+					
 			}
 			
 			Format formatter = new SimpleDateFormat("MMMM");  
@@ -189,11 +190,9 @@ public class List_Attribut extends Attribut implements Serializable {
 				if(n.getNom().equals(s)) {
 					n.supprimerNote(note);
 			}
-			
-			//IL RESTE DATE
-				
-			this.list_all.remove(note);
-			
+							
+			this.list_all.remove(note);			
+	
 			return true;			
 		}
 		
