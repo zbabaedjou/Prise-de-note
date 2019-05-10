@@ -29,10 +29,25 @@
  
  Pour le réaliser, nous nous somme basé sur 3 patterns:
  
-  - Le Builder Patern
-  - Le Patern Composite 
+  - Le Builder Patern pour la création d'une note 
+  - Le Patern Composite  pour le classement des notes selon leur context, groupe et date
   - Le Command Patern
-  - Le Singleton
+  - Le Singleton pour maintenir l'état de l'application 
+  
+  ## Guide D'utilisation
+  
+ Pour utiliser l'application, l'utilisateur doit commencer par installer le pluging de ASCIIDOCTOR dans le navigateur qu'il souhaiterai utiliser.
+ 
+ Ensuite, dans un terminal il doit saisir "note" suivie de la commande voulu. Les commandes sont:
+	 - e|edit 'nom de la note'    :    Pour créer ou modifier une note
+		- v|view 'nom de la note'    :    Pour visualiser une note
+	 - d|delete 'nom de la note'  :    Pour supprimer une note
+		- s|search 'mot clé'         :    Pour chercher un mot clé dans les notes
+		- ls|list                    :    Pour affichier la liste des fichiers du répertoire
+  
+  
+  Pour l'écriture dans le fichier l'utilisateru doit utiliser le slanguage de balisage ASCIIDOCTOR. 
+			
   
   
   
